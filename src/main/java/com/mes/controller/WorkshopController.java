@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import org.apache.poi.ss.usermodel.*;
@@ -214,7 +215,15 @@ public class WorkshopController {
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
+        grid.setPadding(new Insets(20, 20, 10, 20));
+        
+        ColumnConstraints labelCol = new ColumnConstraints();
+        labelCol.setMinWidth(80);
+        labelCol.setPrefWidth(80);
+        ColumnConstraints fieldCol = new ColumnConstraints();
+        fieldCol.setMinWidth(200);
+        fieldCol.setPrefWidth(300);
+        grid.getColumnConstraints().addAll(labelCol, fieldCol);
 
         TextField codeField = new TextField();
         codeField.setPromptText("自动生成");
@@ -250,6 +259,8 @@ public class WorkshopController {
         grid.add(enabledCheck, 1, 5);
 
         dialog.getDialogPane().setContent(grid);
+        dialog.getDialogPane().setPrefWidth(500);
+        dialog.getDialogPane().setPrefHeight(300);
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == saveButtonType) {
@@ -292,7 +303,15 @@ public class WorkshopController {
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
+        grid.setPadding(new Insets(20, 20, 10, 20));
+        
+        ColumnConstraints labelCol2 = new ColumnConstraints();
+        labelCol2.setMinWidth(80);
+        labelCol2.setPrefWidth(80);
+        ColumnConstraints fieldCol2 = new ColumnConstraints();
+        fieldCol2.setMinWidth(200);
+        fieldCol2.setPrefWidth(300);
+        grid.getColumnConstraints().addAll(labelCol2, fieldCol2);
 
         TextField codeField = new TextField(workshop.getCode());
         codeField.setEditable(false);
@@ -319,6 +338,8 @@ public class WorkshopController {
         grid.add(enabledCheck, 1, 5);
 
         dialog.getDialogPane().setContent(grid);
+        dialog.getDialogPane().setPrefWidth(500);
+        dialog.getDialogPane().setPrefHeight(300);
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == saveButtonType) {

@@ -25,7 +25,7 @@
         <Label text="分类名称:" style="-fx-text-fill: #cccccc;"/>
         <TextField fx:id="nameSearchField" promptText="请输入分类名称" styleClass="input-field" prefWidth="150"/>
         <Label text="是否启用:" style="-fx-text-fill: #cccccc;"/>
-        <ComboBox fx:id="enabledSearchCombo" styleClass="input-field" prefWidth="100">
+        <ComboBox fx:id="enabledSearchCombo" styleClass="input-field" prefWidth="120">
             <items>
             </items>
         </ComboBox>
@@ -37,17 +37,17 @@
 
     <TreeTableView fx:id="categoryTreeTable" prefHeight="500">
         <columns>
-            <TreeTableColumn fx:id="codeColumn" text="分类编码" prefWidth="120">
+            <TreeTableColumn fx:id="codeColumn" text="分类编码" prefWidth="150" minWidth="100">
             </TreeTableColumn>
-            <TreeTableColumn fx:id="nameColumn" text="分类名称" prefWidth="150">
+            <TreeTableColumn fx:id="nameColumn" text="分类名称" prefWidth="200" minWidth="150">
             </TreeTableColumn>
-            <TreeTableColumn fx:id="descriptionColumn" text="描述" prefWidth="250">
+            <TreeTableColumn fx:id="descriptionColumn" text="描述" prefWidth="250" minWidth="150">
             </TreeTableColumn>
-            <TreeTableColumn fx:id="enabledColumn" text="是否启用" prefWidth="100">
+            <TreeTableColumn fx:id="enabledColumn" text="是否启用" prefWidth="100" minWidth="80">
             </TreeTableColumn>
-            <TreeTableColumn fx:id="createTimeColumn" text="创建时间" prefWidth="150">
+            <TreeTableColumn fx:id="createTimeColumn" text="创建时间" prefWidth="150" minWidth="100">
             </TreeTableColumn>
-            <TreeTableColumn fx:id="actionColumn" text="操作" prefWidth="150">
+            <TreeTableColumn fx:id="actionColumn" text="操作" prefWidth="150" minWidth="100">
             </TreeTableColumn>
         </columns>
     </TreeTableView>

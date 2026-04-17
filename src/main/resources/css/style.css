@@ -205,6 +205,29 @@
     -fx-background-color: #007acc;
 }
 
+.combo-box .list-cell:filled:selected {
+    -fx-background-color: #007acc;
+    -fx-text-fill: white;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: #3c3c3c;
+}
+
+.combo-box-popup .list-view .list-cell {
+    -fx-text-fill: white;
+    -fx-background-color: #3c3c3c;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: #007acc;
+}
+
+.combo-box-popup .list-view .list-cell:filled:selected {
+    -fx-background-color: #007acc;
+    -fx-text-fill: white;
+}
+
 .check-box {
     -fx-text-fill: white;
 }
@@ -220,4 +243,66 @@
 
 .check-box:selected .box {
     -fx-background-color: #007acc;
+}
+
+.tree-table-view {
+    -fx-background-color: #252526;
+    -fx-table-cell-border-color: transparent;
+}
+
+.tree-table-view .column-header {
+    -fx-background-color: #3c3c3c;
+}
+
+.tree-table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.tree-table-row-cell {
+    -fx-background-color: #252526;
+    -fx-text-fill: white;
+}
+
+.tree-table-row-cell:odd {
+    -fx-background-color: #2a2d2e;
+}
+
+.tree-table-row-cell:hover {
+    -fx-background-color: #2a2d2e;
+}
+
+.tree-table-row-cell:selected {
+    -fx-background-color: #007acc;
+    -fx-text-fill: white;
+}
+
+.tree-table-cell {
+    -fx-text-fill: white;
+}
+
+.tree-table-cell:selected {
+    -fx-text-fill: white;
+}
+
+.tree-table-row-cell:selected .tree-table-cell {
+    -fx-text-fill: white;
+}
+
+.tree-view {
+    -fx-background-color: #252526;
+}
+
+.tree-cell {
+    -fx-background-color: #252526;
+    -fx-text-fill: white;
+}
+
+.tree-cell:hover {
+    -fx-background-color: #2a2d2e;
+}
+
+.tree-cell:selected {
+    -fx-background-color: #007acc;
+    -fx-text-fill: white;
 }
