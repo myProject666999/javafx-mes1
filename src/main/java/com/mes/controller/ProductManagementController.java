@@ -324,6 +324,7 @@ public class ProductManagementController {
         Dialog<ProductDTO> dialog = new Dialog<>();
         dialog.setTitle("新增物料/产品");
         dialog.setHeaderText(null);
+        dialog.setWidth(700);
 
         ButtonType saveButtonType = new ButtonType("保存", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
@@ -331,7 +332,8 @@ public class ProductManagementController {
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
+        grid.setPadding(new Insets(20, 20, 10, 10));
+        grid.getStyleClass().add("dialog-grid-pane");
 
         TextField codeField = new TextField();
         codeField.setPromptText("请输入物料编码");
@@ -456,6 +458,7 @@ public class ProductManagementController {
         Dialog<ProductDTO> dialog = new Dialog<>();
         dialog.setTitle("修改物料/产品");
         dialog.setHeaderText(null);
+        dialog.setWidth(700);
 
         ButtonType saveButtonType = new ButtonType("保存", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
@@ -463,7 +466,8 @@ public class ProductManagementController {
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
+        grid.setPadding(new Insets(20, 20, 10, 10));
+        grid.getStyleClass().add("dialog-grid-pane");
 
         TextField codeField = new TextField(product.getCode());
         codeField.setEditable(false);
@@ -699,6 +703,7 @@ public class ProductManagementController {
         Dialog<BomItemDTO> dialog = new Dialog<>();
         dialog.setTitle("添加BOM物料");
         dialog.setHeaderText(null);
+        dialog.setWidth(700);
 
         ButtonType addButtonType = new ButtonType("添加", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(addButtonType, ButtonType.CANCEL);
@@ -706,7 +711,8 @@ public class ProductManagementController {
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
+        grid.setPadding(new Insets(20, 20, 10, 10));
+        grid.getStyleClass().add("dialog-grid-pane");
 
         ComboBox<ProductDTO> materialCombo = new ComboBox<>();
         materialCombo.setItems(FXCollections.observableArrayList(productService.findAllSimple()));

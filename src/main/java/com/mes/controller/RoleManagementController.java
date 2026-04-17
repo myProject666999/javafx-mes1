@@ -138,7 +138,7 @@ public class RoleManagementController {
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
+        grid.setPadding(new Insets(20, 20, 10, 10));
 
         TextField nameField = new TextField();
         nameField.getStyleClass().add("input-field");

@@ -149,7 +149,7 @@ public class UserManagementController {
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
+        grid.setPadding(new Insets(20, 20, 10, 10));
 
         TextField usernameField = new TextField();
         usernameField.getStyleClass().add("input-field");
