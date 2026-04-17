@@ -207,6 +207,7 @@ public class WorkshopController {
         Dialog<WorkshopDTO> dialog = new Dialog<>();
         dialog.setTitle("新增车间");
         dialog.setHeaderText(null);
+        dialog.setWidth(700);
 
         ButtonType saveButtonType = new ButtonType("保存", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
@@ -214,7 +215,8 @@ public class WorkshopController {
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
+        grid.setPadding(new Insets(20, 20, 10, 10));
+        grid.getStyleClass().add("dialog-grid-pane");
 
         TextField codeField = new TextField();
         codeField.setPromptText("自动生成");
@@ -285,6 +287,7 @@ public class WorkshopController {
         Dialog<WorkshopDTO> dialog = new Dialog<>();
         dialog.setTitle("修改车间");
         dialog.setHeaderText(null);
+        dialog.setWidth(700);
 
         ButtonType saveButtonType = new ButtonType("保存", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(saveButtonType, ButtonType.CANCEL);
@@ -292,7 +295,8 @@ public class WorkshopController {
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
+        grid.setPadding(new Insets(20, 20, 10, 10));
+        grid.getStyleClass().add("dialog-grid-pane");
 
         TextField codeField = new TextField(workshop.getCode());
         codeField.setEditable(false);
