@@ -30,7 +30,7 @@
         <Label text="所属工序:" style="-fx-text-fill: #cccccc;"/>
         <TextField fx:id="processSearchField" promptText="请输入工序名称" styleClass="input-field" prefWidth="120"/>
         <Label text="是否启用:" style="-fx-text-fill: #cccccc;"/>
-        <ComboBox fx:id="enabledSearchCombo" styleClass="input-field" prefWidth="80">
+        <ComboBox fx:id="enabledSearchCombo" styleClass="input-field" prefWidth="120">
             <items>
             </items>
         </ComboBox>
