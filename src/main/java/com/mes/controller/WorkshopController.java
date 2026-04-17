@@ -214,28 +214,35 @@ public class WorkshopController {
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
+        grid.setPadding(new Insets(20, 20, 10, 20));
 
         TextField codeField = new TextField();
         codeField.setPromptText("自动生成");
         codeField.setEditable(false);
         codeField.setText(workshopService.generateCode());
+        codeField.setPrefWidth(300);
 
         TextField nameField = new TextField();
         nameField.setPromptText("请输入车间名称");
+        nameField.setPrefWidth(300);
 
         TextField locationField = new TextField();
         locationField.setPromptText("请输入车间位置");
+        locationField.setPrefWidth(300);
 
         TextField managerField = new TextField();
         managerField.setPromptText("请输入负责人");
+        managerField.setPrefWidth(300);
 
         TextArea descField = new TextArea();
         descField.setPromptText("请输入描述");
         descField.setPrefRowCount(3);
+        descField.setPrefWidth(300);
 
-        CheckBox enabledCheck = new CheckBox("启用");
-        enabledCheck.setSelected(true);
+        ComboBox<String> enabledCombo = new ComboBox<>();
+        enabledCombo.setItems(FXCollections.observableArrayList("启用", "禁用"));
+        enabledCombo.setValue("启用");
+        enabledCombo.setPrefWidth(300);
 
         grid.add(new Label("车间编码:"), 0, 0);
         grid.add(codeField, 1, 0);
@@ -247,9 +254,11 @@ public class WorkshopController {
         grid.add(managerField, 1, 3);
         grid.add(new Label("描述:"), 0, 4);
         grid.add(descField, 1, 4);
-        grid.add(enabledCheck, 1, 5);
+        grid.add(new Label("是否可用:"), 0, 5);
+        grid.add(enabledCombo, 1, 5);
 
         dialog.getDialogPane().setContent(grid);
+        dialog.getDialogPane().setPrefWidth(450);
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == saveButtonType) {
@@ -264,7 +273,7 @@ public class WorkshopController {
                 dto.setLocation(locationField.getText());
                 dto.setManager(managerField.getText());
                 dto.setDescription(descField.getText());
-                dto.setEnabled(enabledCheck.isSelected());
+                dto.setEnabled("启用".equals(enabledCombo.getValue()));
                 return dto;
             }
             return null;
@@ -292,19 +301,29 @@ public class WorkshopController {
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
+        grid.setPadding(new Insets(20, 20, 10, 20));
 
         TextField codeField = new TextField(workshop.getCode());
         codeField.setEditable(false);
+        codeField.setPrefWidth(300);
 
         TextField nameField = new TextField(workshop.getName());
+        nameField.setPrefWidth(300);
+
         TextField locationField = new TextField(workshop.getLocation());
+        locationField.setPrefWidth(300);
+
         TextField managerField = new TextField(workshop.getManager());
+        managerField.setPrefWidth(300);
+
         TextArea descField = new TextArea(workshop.getDescription());
         descField.setPrefRowCount(3);
+        descField.setPrefWidth(300);
 
-        CheckBox enabledCheck = new CheckBox("启用");
-        enabledCheck.setSelected(workshop.isEnabled());
+        ComboBox<String> enabledCombo = new ComboBox<>();
+        enabledCombo.setItems(FXCollections.observableArrayList("启用", "禁用"));
+        enabledCombo.setValue(workshop.isEnabled() ? "启用" : "禁用");
+        enabledCombo.setPrefWidth(300);
 
         grid.add(new Label("车间编码:"), 0, 0);
         grid.add(codeField, 1, 0);
@@ -316,9 +335,11 @@ public class WorkshopController {
         grid.add(managerField, 1, 3);
         grid.add(new Label("描述:"), 0, 4);
         grid.add(descField, 1, 4);
-        grid.add(enabledCheck, 1, 5);
+        grid.add(new Label("是否可用:"), 0, 5);
+        grid.add(enabledCombo, 1, 5);
 
         dialog.getDialogPane().setContent(grid);
+        dialog.getDialogPane().setPrefWidth(450);
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == saveButtonType) {
@@ -334,7 +355,7 @@ public class WorkshopController {
                 dto.setLocation(locationField.getText());
                 dto.setManager(managerField.getText());
                 dto.setDescription(descField.getText());
-                dto.setEnabled(enabledCheck.isSelected());
+                dto.setEnabled("启用".equals(enabledCombo.getValue()));
                 return dto;
             }
             return null;

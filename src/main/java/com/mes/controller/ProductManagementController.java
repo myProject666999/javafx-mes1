@@ -331,10 +331,11 @@ public class ProductManagementController {
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
+        grid.setPadding(new Insets(20, 20, 10, 20));
 
         TextField codeField = new TextField();
         codeField.setPromptText("请输入物料编码");
+        codeField.setPrefWidth(250);
 
         Button autoGenBtn = new Button("自动生成");
         autoGenBtn.setOnAction(e -> {
@@ -343,13 +344,16 @@ public class ProductManagementController {
         });
 
         HBox codeBox = new HBox(10, codeField, autoGenBtn);
+        codeBox.setPrefWidth(350);
 
         TextField nameField = new TextField();
         nameField.setPromptText("请输入物料名称");
+        nameField.setPrefWidth(350);
 
         ComboBox<ProductCategoryDTO> categoryCombo = new ComboBox<>();
         categoryCombo.setItems(FXCollections.observableArrayList(categoryService.findAllEnabled()));
         categoryCombo.setPromptText("请选择分类");
+        categoryCombo.setPrefWidth(350);
         categoryCombo.setConverter(new javafx.util.StringConverter<>() {
             @Override
             public String toString(ProductCategoryDTO object) {
@@ -371,6 +375,7 @@ public class ProductManagementController {
         ComboBox<UnitOfMeasure> unitCombo = new ComboBox<>();
         unitCombo.setItems(FXCollections.observableArrayList(unitOfMeasureService.findAllEnabled()));
         unitCombo.setPromptText("请选择单位");
+        unitCombo.setPrefWidth(350);
         unitCombo.setConverter(new javafx.util.StringConverter<>() {
             @Override
             public String toString(UnitOfMeasure object) {
@@ -385,13 +390,17 @@ public class ProductManagementController {
 
         TextField specField = new TextField();
         specField.setPromptText("请输入规格");
+        specField.setPrefWidth(350);
 
         TextArea descField = new TextArea();
         descField.setPromptText("请输入描述");
         descField.setPrefRowCount(3);
+        descField.setPrefWidth(350);
 
-        CheckBox enabledCheck = new CheckBox("启用");
-        enabledCheck.setSelected(true);
+        ComboBox<String> enabledCombo = new ComboBox<>();
+        enabledCombo.setItems(FXCollections.observableArrayList("启用", "禁用"));
+        enabledCombo.setValue("启用");
+        enabledCombo.setPrefWidth(350);
 
         grid.add(new Label("物料编码:"), 0, 0);
         grid.add(codeBox, 1, 0);
@@ -405,9 +414,11 @@ public class ProductManagementController {
         grid.add(specField, 1, 4);
         grid.add(new Label("描述:"), 0, 5);
         grid.add(descField, 1, 5);
-        grid.add(enabledCheck, 1, 6);
+        grid.add(new Label("是否启用:"), 0, 6);
+        grid.add(enabledCombo, 1, 6);
 
         dialog.getDialogPane().setContent(grid);
+        dialog.getDialogPane().setPrefWidth(500);
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == saveButtonType) {
@@ -435,7 +446,7 @@ public class ProductManagementController {
                 dto.setSpecification(specField.getText());
                 dto.setCategoryId(categoryCombo.getValue().getId());
                 dto.setUnitId(unitCombo.getValue().getId());
-                dto.setEnabled(enabledCheck.isSelected());
+                dto.setEnabled("启用".equals(enabledCombo.getValue()));
                 return dto;
             }
             return null;
@@ -463,15 +474,18 @@ public class ProductManagementController {
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
+        grid.setPadding(new Insets(20, 20, 10, 20));
 
         TextField codeField = new TextField(product.getCode());
         codeField.setEditable(false);
+        codeField.setPrefWidth(350);
 
         TextField nameField = new TextField(product.getName());
+        nameField.setPrefWidth(350);
 
         ComboBox<ProductCategoryDTO> categoryCombo = new ComboBox<>();
         categoryCombo.setItems(FXCollections.observableArrayList(categoryService.findAllEnabled()));
+        categoryCombo.setPrefWidth(350);
         categoryCombo.setConverter(new javafx.util.StringConverter<>() {
             @Override
             public String toString(ProductCategoryDTO object) {
@@ -490,6 +504,7 @@ public class ProductManagementController {
 
         ComboBox<UnitOfMeasure> unitCombo = new ComboBox<>();
         unitCombo.setItems(FXCollections.observableArrayList(unitOfMeasureService.findAllEnabled()));
+        unitCombo.setPrefWidth(350);
         unitCombo.setConverter(new javafx.util.StringConverter<>() {
             @Override
             public String toString(UnitOfMeasure object) {
@@ -507,18 +522,24 @@ public class ProductManagementController {
                 .ifPresent(unitCombo::setValue);
 
         TextField specField = new TextField(product.getSpecification());
+        specField.setPrefWidth(350);
 
         TextArea descField = new TextArea(product.getDescription());
         descField.setPrefRowCount(3);
+        descField.setPrefWidth(350);
 
         TextField minStockField = new TextField(product.getMinStock() != null ? String.valueOf(product.getMinStock()) : "");
         minStockField.setPromptText("最小库存");
+        minStockField.setPrefWidth(350);
 
         TextField maxStockField = new TextField(product.getMaxStock() != null ? String.valueOf(product.getMaxStock()) : "");
         maxStockField.setPromptText("最大库存");
+        maxStockField.setPrefWidth(350);
 
-        CheckBox enabledCheck = new CheckBox("启用");
-        enabledCheck.setSelected(product.isEnabled());
+        ComboBox<String> enabledCombo = new ComboBox<>();
+        enabledCombo.setItems(FXCollections.observableArrayList("启用", "禁用"));
+        enabledCombo.setValue(product.isEnabled() ? "启用" : "禁用");
+        enabledCombo.setPrefWidth(350);
 
         grid.add(new Label("物料编码:"), 0, 0);
         grid.add(codeField, 1, 0);
@@ -536,9 +557,11 @@ public class ProductManagementController {
         grid.add(minStockField, 1, 6);
         grid.add(new Label("最大库存:"), 0, 7);
         grid.add(maxStockField, 1, 7);
-        grid.add(enabledCheck, 1, 8);
+        grid.add(new Label("是否启用:"), 0, 8);
+        grid.add(enabledCombo, 1, 8);
 
         dialog.getDialogPane().setContent(grid);
+        dialog.getDialogPane().setPrefWidth(500);
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == saveButtonType) {
@@ -563,7 +586,7 @@ public class ProductManagementController {
                 dto.setSpecification(specField.getText());
                 dto.setCategoryId(categoryCombo.getValue().getId());
                 dto.setUnitId(unitCombo.getValue().getId());
-                dto.setEnabled(enabledCheck.isSelected());
+                dto.setEnabled("启用".equals(enabledCombo.getValue()));
 
                 try {
                     if (!minStockField.getText().trim().isEmpty()) {

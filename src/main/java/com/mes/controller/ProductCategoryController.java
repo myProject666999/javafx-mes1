@@ -309,22 +309,26 @@ public class ProductCategoryController {
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
+        grid.setPadding(new Insets(20, 20, 10, 20));
 
         TextField codeField = new TextField();
         codeField.setPromptText("自动生成");
         codeField.setEditable(false);
+        codeField.setPrefWidth(350);
 
         TextField nameField = new TextField();
         nameField.setPromptText("请输入分类名称");
+        nameField.setPrefWidth(350);
 
         TextArea descField = new TextArea();
         descField.setPromptText("请输入描述");
         descField.setPrefRowCount(3);
+        descField.setPrefWidth(350);
 
         ComboBox<ProductCategoryDTO> parentCombo = new ComboBox<>();
         parentCombo.setItems(FXCollections.observableArrayList(categoryService.findAll()));
         parentCombo.setPromptText("请选择父分类（可选）");
+        parentCombo.setPrefWidth(350);
         parentCombo.setConverter(new javafx.util.StringConverter<>() {
             @Override
             public String toString(ProductCategoryDTO object) {
@@ -337,8 +341,10 @@ public class ProductCategoryController {
             }
         });
 
-        CheckBox enabledCheck = new CheckBox("启用");
-        enabledCheck.setSelected(true);
+        ComboBox<String> enabledCombo = new ComboBox<>();
+        enabledCombo.setItems(FXCollections.observableArrayList("启用", "禁用"));
+        enabledCombo.setValue("启用");
+        enabledCombo.setPrefWidth(350);
 
         grid.add(new Label("分类编码:"), 0, 0);
         grid.add(codeField, 1, 0);
@@ -348,9 +354,11 @@ public class ProductCategoryController {
         grid.add(parentCombo, 1, 2);
         grid.add(new Label("描述:"), 0, 3);
         grid.add(descField, 1, 3);
-        grid.add(enabledCheck, 1, 4);
+        grid.add(new Label("是否启用:"), 0, 4);
+        grid.add(enabledCombo, 1, 4);
 
         dialog.getDialogPane().setContent(grid);
+        dialog.getDialogPane().setPrefWidth(500);
 
         parentCombo.valueProperty().addListener((obs, oldVal, newVal) -> {
             Long parentId = newVal == null ? null : newVal.getId();
@@ -371,7 +379,7 @@ public class ProductCategoryController {
                 dto.setCode(codeField.getText());
                 dto.setName(nameField.getText().trim());
                 dto.setDescription(descField.getText());
-                dto.setEnabled(enabledCheck.isSelected());
+                dto.setEnabled("启用".equals(enabledCombo.getValue()));
                 if (parentCombo.getValue() != null) {
                     dto.setParentId(parentCombo.getValue().getId());
                 }
@@ -402,17 +410,23 @@ public class ProductCategoryController {
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
+        grid.setPadding(new Insets(20, 20, 10, 20));
 
         TextField codeField = new TextField(category.getCode());
         codeField.setEditable(false);
+        codeField.setPrefWidth(350);
 
         TextField nameField = new TextField(category.getName());
+        nameField.setPrefWidth(350);
+
         TextArea descField = new TextArea(category.getDescription());
         descField.setPrefRowCount(3);
+        descField.setPrefWidth(350);
 
-        CheckBox enabledCheck = new CheckBox("启用");
-        enabledCheck.setSelected(category.isEnabled());
+        ComboBox<String> enabledCombo = new ComboBox<>();
+        enabledCombo.setItems(FXCollections.observableArrayList("启用", "禁用"));
+        enabledCombo.setValue(category.isEnabled() ? "启用" : "禁用");
+        enabledCombo.setPrefWidth(350);
 
         grid.add(new Label("分类编码:"), 0, 0);
         grid.add(codeField, 1, 0);
@@ -420,9 +434,11 @@ public class ProductCategoryController {
         grid.add(nameField, 1, 1);
         grid.add(new Label("描述:"), 0, 2);
         grid.add(descField, 1, 2);
-        grid.add(enabledCheck, 1, 3);
+        grid.add(new Label("是否启用:"), 0, 3);
+        grid.add(enabledCombo, 1, 3);
 
         dialog.getDialogPane().setContent(grid);
+        dialog.getDialogPane().setPrefWidth(500);
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == saveButtonType) {
@@ -436,7 +452,7 @@ public class ProductCategoryController {
                 dto.setCode(codeField.getText());
                 dto.setName(nameField.getText().trim());
                 dto.setDescription(descField.getText());
-                dto.setEnabled(enabledCheck.isSelected());
+                dto.setEnabled("启用".equals(enabledCombo.getValue()));
                 dto.setParentId(category.getParentId());
                 return dto;
             }
