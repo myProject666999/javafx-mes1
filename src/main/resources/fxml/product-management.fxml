@@ -33,7 +33,7 @@
             <Label text="物料名称:" style="-fx-text-fill: #cccccc;"/>
             <TextField fx:id="nameSearchField" promptText="请输入物料名称" styleClass="input-field" prefWidth="120"/>
             <Label text="是否启用:" style="-fx-text-fill: #cccccc;"/>
-            <ComboBox fx:id="enabledSearchCombo" styleClass="input-field" prefWidth="80"/>
+            <ComboBox fx:id="enabledSearchCombo" styleClass="input-field" prefWidth="120"/>
             <Button styleClass="action-button" text="🔍 查询" onAction="#handleSearch"
                     style="-fx-background-color: #007acc; -fx-text-fill: white;"/>
             <Button styleClass="action-button" text="🔄 重置" onAction="#handleReset"

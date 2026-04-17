@@ -259,19 +259,22 @@ public class WorkstationController {
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
+        grid.setPadding(new Insets(20, 20, 10, 20));
 
         TextField codeField = new TextField();
         codeField.setPromptText("自动生成");
         codeField.setEditable(false);
         codeField.setText(workstationService.generateCode());
+        codeField.setPrefWidth(350);
 
         TextField nameField = new TextField();
         nameField.setPromptText("请输入工作站名称");
+        nameField.setPrefWidth(350);
 
         ComboBox<WorkshopDTO> workshopCombo = new ComboBox<>();
         workshopCombo.setItems(FXCollections.observableArrayList(workshopService.findAllEnabled()));
         workshopCombo.setPromptText("请选择车间");
+        workshopCombo.setPrefWidth(350);
         workshopCombo.setConverter(new StringConverter<>() {
             @Override
             public String toString(WorkshopDTO dto) {
@@ -286,19 +289,25 @@ public class WorkstationController {
 
         TextField processField = new TextField();
         processField.setPromptText("请输入所属工序");
+        processField.setPrefWidth(350);
 
         TextField equipmentCountField = new TextField("0");
         equipmentCountField.setPromptText("设备数量");
+        equipmentCountField.setPrefWidth(350);
 
         TextField workerCountField = new TextField("0");
         workerCountField.setPromptText("工人数量");
+        workerCountField.setPrefWidth(350);
 
         TextArea descField = new TextArea();
         descField.setPromptText("请输入描述");
         descField.setPrefRowCount(3);
+        descField.setPrefWidth(350);
 
-        CheckBox enabledCheck = new CheckBox("启用");
-        enabledCheck.setSelected(true);
+        ComboBox<String> enabledCombo = new ComboBox<>();
+        enabledCombo.setItems(FXCollections.observableArrayList("启用", "禁用"));
+        enabledCombo.setValue("启用");
+        enabledCombo.setPrefWidth(350);
 
         grid.add(new Label("工作站编码:"), 0, 0);
         grid.add(codeField, 1, 0);
@@ -314,9 +323,11 @@ public class WorkstationController {
         grid.add(workerCountField, 1, 5);
         grid.add(new Label("描述:"), 0, 6);
         grid.add(descField, 1, 6);
-        grid.add(enabledCheck, 1, 7);
+        grid.add(new Label("是否启用:"), 0, 7);
+        grid.add(enabledCombo, 1, 7);
 
         dialog.getDialogPane().setContent(grid);
+        dialog.getDialogPane().setPrefWidth(500);
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == saveButtonType) {
@@ -349,7 +360,7 @@ public class WorkstationController {
                     dto.setWorkerCount(0);
                 }
                 dto.setDescription(descField.getText());
-                dto.setEnabled(enabledCheck.isSelected());
+                dto.setEnabled("启用".equals(enabledCombo.getValue()));
                 return dto;
             }
             return null;
@@ -377,15 +388,18 @@ public class WorkstationController {
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
+        grid.setPadding(new Insets(20, 20, 10, 20));
 
         TextField codeField = new TextField(workstation.getCode());
         codeField.setEditable(false);
+        codeField.setPrefWidth(350);
 
         TextField nameField = new TextField(workstation.getName());
+        nameField.setPrefWidth(350);
 
         ComboBox<WorkshopDTO> workshopCombo = new ComboBox<>();
         workshopCombo.setItems(FXCollections.observableArrayList(workshopService.findAllEnabled()));
+        workshopCombo.setPrefWidth(350);
         workshopCombo.setConverter(new StringConverter<>() {
             @Override
             public String toString(WorkshopDTO dto) {
@@ -402,13 +416,22 @@ public class WorkstationController {
         }
 
         TextField processField = new TextField(workstation.getProcessName());
+        processField.setPrefWidth(350);
+
         TextField equipmentCountField = new TextField(String.valueOf(workstation.getEquipmentCount()));
+        equipmentCountField.setPrefWidth(350);
+
         TextField workerCountField = new TextField(String.valueOf(workstation.getWorkerCount()));
+        workerCountField.setPrefWidth(350);
+
         TextArea descField = new TextArea(workstation.getDescription());
         descField.setPrefRowCount(3);
+        descField.setPrefWidth(350);
 
-        CheckBox enabledCheck = new CheckBox("启用");
-        enabledCheck.setSelected(workstation.isEnabled());
+        ComboBox<String> enabledCombo = new ComboBox<>();
+        enabledCombo.setItems(FXCollections.observableArrayList("启用", "禁用"));
+        enabledCombo.setValue(workstation.isEnabled() ? "启用" : "禁用");
+        enabledCombo.setPrefWidth(350);
 
         grid.add(new Label("工作站编码:"), 0, 0);
         grid.add(codeField, 1, 0);
@@ -424,9 +447,11 @@ public class WorkstationController {
         grid.add(workerCountField, 1, 5);
         grid.add(new Label("描述:"), 0, 6);
         grid.add(descField, 1, 6);
-        grid.add(enabledCheck, 1, 7);
+        grid.add(new Label("是否启用:"), 0, 7);
+        grid.add(enabledCombo, 1, 7);
 
         dialog.getDialogPane().setContent(grid);
+        dialog.getDialogPane().setPrefWidth(500);
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == saveButtonType) {
@@ -460,7 +485,7 @@ public class WorkstationController {
                     dto.setWorkerCount(0);
                 }
                 dto.setDescription(descField.getText());
-                dto.setEnabled(enabledCheck.isSelected());
+                dto.setEnabled("启用".equals(enabledCombo.getValue()));
                 return dto;
             }
             return null;
